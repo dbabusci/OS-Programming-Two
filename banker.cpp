@@ -42,6 +42,11 @@ bool isSafe(int processes[], int avail[], int maxm[][R], int allot[][R]){
             return false;
         }
     }
+    cout << "System is in safe state.\nSafe sequence is: ";
+    for(int i = 0; i < P; i++) 
+        cout << safeSeq[i] << " ";
+    
+    return true;
 }
 
 int main(){
