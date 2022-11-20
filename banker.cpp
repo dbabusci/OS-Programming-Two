@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -50,10 +51,21 @@ bool isSafe(int processes[], int avail[], int maxm[][R], int allot[][R]){
 }
 
 int main(){
+    char input;
+    int processes[10];
+    ifstream file;
+    file.open("input.txt");
+    while(input != ';'){
+        int i = 0;
+        file >> processes[i];
+        i++;
+    }
+    /*
     int processes[] = {0,1,2,3,4};
     int avail[] = {3,3,2};
     int maxm[][R] = {{7,5,3},{3,2,2},{9,0,2},{2,2,2},{4,3,3}};
     int allot[][R] = {{0,1,0},{2,0,0},{3,0,2},{2,1,1},{0,0,2}};
     isSafe(processes, avail, maxm, allot);
     return 0;
+    */
 }
