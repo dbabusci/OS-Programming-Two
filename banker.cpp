@@ -6,33 +6,36 @@ using namespace std;
 const int P = 5;
 const int R = 3;
 
-void calculateNeed(int need[P][R], int max[P][R], int alloted[P][R]){
+void calNeed(int needed[P][R], int max[P][R], int alloted[P][R]){
     for(int i = 0; i < P; i++)
         for(int j = 0; j < R; j++)
-            need[i][j] = max[i][j] - alloted[i][j];
+            needed[i][j] = max[i][j] - alloted[i][j];
 }
 
 bool safe(int processes[], int available[], int max[][R], int alloted[][R]){
-    int need[P][R];
-    calculateNeed(need, max, alloted);
+    int needed[P][R];
+    calNeed(needed, max, alloted);
     bool fin[P] = {0};
     int sequence[P];
     int work[R];
     for(int i = 0; i < R; i++)
         work[i] = available[i];
-    int count = 0;
-    while(count < P){
+    int counter = 0;
+    while(counter < P){
         bool found = false;
         for(int p = 0; p < P; p++){
             if(fin[p] == 0){
                 int j;
-                for(j = 0; j < R; j++)
-                    if(need[p][j] > work[j])
+                for(j = 0; j < R; j++){
+                    if(needed[p][j] > work[j]){
                         break;
+                    }
+                }
                 if(j == R){
-                    for(int k = 0; k < R; k++)
+                    for(int k = 0; k < R; k++){
                         work[k] += alloted[p][k];
-                    sequence[count++] = p;
+                    }
+                    sequence[counter++] = p;
                     fin[p] = true;
                     found = true;
                 }
@@ -44,9 +47,9 @@ bool safe(int processes[], int available[], int max[][R], int alloted[][R]){
         }
     }
     cout << "System is in safe state.\nSafe sequence is: ";
-    for(int i = 0; i < P; i++) 
+    for(int i = 0; i < P; i++){ 
         cout << sequence[i] << " ";
-    
+    }
     return true;
 }
 
